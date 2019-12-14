@@ -1,7 +1,7 @@
 swagger: "2.0"
 
 info:
-  title: "My first API"
+  title: "My First Person API"
   version: "1.0"
 
 basePath: /api
@@ -16,6 +16,26 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Item'
+    post:
+      operationId: api.items.create
+      parameters:
+        - name: person
+          in: body
+          description: 'Person to create'
+          required: True
+          schema:
+            type: object
+            properties:
+              fname:
+                type: string
+                description: First name of person to create
+              lname:
+                type: string
+                description: Last name of person to create
+      responses:
+        '200':
+          description: 'Create a new person'
+
 
 definitions:
   Item:
