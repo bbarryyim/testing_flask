@@ -6,5 +6,6 @@ Using connexion to build routes and generate swagger docs
 <strong>You can access the swagger:</strong><br>
 localhost:8080/api/ui
 
-<strong>You can access the search endpoint:</strong><br>
+<strong>You can access the search (GET) endpoint:</strong><br>
 localhost:8080/api/items
+
