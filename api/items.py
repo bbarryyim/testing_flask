@@ -25,11 +25,19 @@ PERSON = {
 }
 
 
-def search() -> list:
+def getAll() -> list:
     return PERSON
 
 
 def getOne(lname):
+    """
+    This function responds to a request for /api/person/{lname}
+    with one matching person from people
+
+    :param lname:   last name of person to find
+    :return:        person matching last name
+
+    """
     if lname in PERSON:
         person = PERSON.get(lname)
         return person
@@ -40,6 +48,13 @@ def getOne(lname):
 
 
 def create(person):
+    """
+    This function responds to a request for /api/person/{lname}
+    with one matching person from people
+
+    :param lname:   last name of person to find
+    :return:        person matching last name
+    """
     lname = person.get('lname', None)
     fname = person.get('fname', None)
     timestamp = get_timestamp()
@@ -60,6 +75,13 @@ def create(person):
 
 
 def delete(lname):
+    """
+    This function responds to a request for /api/person/{lname}
+    with one matching person from people
+
+    :param lname:   last name of person to find
+    :return:        person matching last name
+    """
     if lname in PERSON:
         del PERSON[lname]
         return make_response(
