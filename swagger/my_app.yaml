@@ -9,6 +9,7 @@ basePath: /api
 paths:
   /items/:
     get:
+      operationId: api.items.getAll
       responses:
         '200':
           description: 'Fetch a list of items'
