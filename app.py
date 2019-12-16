@@ -16,6 +16,11 @@ def getone():
     return render_template("getOne.html")
 
 
+@app.route("/deleteOne/")
+def deteleone():
+    return render_template("deleteOne.html")
+
+
 @app.route("/getonecontrol")
 def getonecontrol():
     lname = request.form['lastname']
