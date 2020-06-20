@@ -1,28 +1,59 @@
 swagger: "2.0"
-
 info:
-  title: "My First Person API"
-  version: "1.0"
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
 
 basePath: /api
 
+# Paths supported by the server application
 paths:
-  /items/:
+  /person:
     get:
-      operationId: api.items.getAll
+      operationId: api.person.read_all
+      tags:
+        - People
+      summary: Read the entire list of person
+      description: Read the list of person
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of person to get from person
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering person
+          required: false
       responses:
-        '200':
-          description: 'Fetch a list of items'
+        200:
+          description: Successfully read person list operation
           schema:
             type: array
             items:
-              $ref: '#/definitions/Item'
+              properties:
+                fname:
+                  type: string
+                lname:
+                  type: string
+                timestamp:
+                  type: string
+
     post:
-      operationId: api.items.create
+      operationId: api.person.create
+      tags:
+        - People
+      summary: Create a person and add it to the person list
+      description: Create a new person in the person list
       parameters:
         - name: person
           in: body
-          description: 'Person to create'
+          description: Person to create
           required: True
           schema:
             type: object
@@ -34,12 +65,16 @@ paths:
                 type: string
                 description: Last name of person to create
       responses:
-        '200':
-          description: 'Create a new person'
+        201:
+          description: Successfully created person in list
 
-  /items/{lname}:
+  /person/{lname}:
     get:
-      operationId: api.items.getOne
+      operationId: api.person.read_one
+      tags:
+        - People
+      summary: Read one person from the person list
+      description: Read one person from the person list
       parameters:
         - name: lname
           in: path
@@ -47,8 +82,8 @@ paths:
           type: string
           required: True
       responses:
-        '200':
-          description: 'Successfully read person from people list operation'
+        200:
+          description: Successfully read person from person list operation
           schema:
             properties:
               fname:
@@ -57,24 +92,43 @@ paths:
                 type: string
               timestamp:
                 type: string
+
+    put:
+      operationId: api.person.update
+      tags:
+        - People
+      summary: Update a person in the person list
+      description: Update a person in the person list
+      parameters:
+        - name: lname
+          in: path
+          description: Last name of the person to update in the list
+          type: string
+          required: True
+        - name: person
+          in: body
+          schema:
+            type: object
+            properties:
+              fname:
+                type: string
+              lname:
+                type: string
+      responses:
+        200:
+          description: Successfully updated person in person list
+
     delete:
-      operationId: api.items.delete
+      operationId: api.person.delete
+      tags:
+        - People
+      summary: Delete a person from the person list
+      description: Delete a person
       parameters:
         - name: lname
           in: path
           type: string
           required: True
       responses:
-        '200':
-          description: 'Delete a person'
-
-
-definitions:
-  Item:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
+        200:
+          description: Successfully deleted a person from person list
